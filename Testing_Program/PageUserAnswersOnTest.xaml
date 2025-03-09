@@ -1,0 +1,44 @@
+﻿<Page x:Class="Testing_Program.PageUserAnswersOnTest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Testing_Program"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="PageUserAnswersOnTest">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Label Content="Тест:" HorizontalAlignment="Left" Margin="118,26,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBlock Name="txtTest" HorizontalAlignment="Left" Margin="166,31,0,0" VerticalAlignment="Top" FontSize="18" Width="505" Height="34" TextWrapping="Wrap"/>
+        <Label Content="Вопрос:" HorizontalAlignment="Left" Margin="118,100,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBlock Name="txtQuestion" HorizontalAlignment="Left" Margin="193,105,0,0" VerticalAlignment="Top" FontSize="18" Width="523" Height="78" TextWrapping="Wrap"/>
+        <Label Content="Варианты ответов" HorizontalAlignment="Left" Margin="118,183,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <ListBox Name="listboxAnswers" Margin="118,217,141,155" SelectionMode="Single" SelectionChanged="listboxAnswers_SelectionChanged" FontSize="16"/>
+        <Button Name="btnSave" Click="btnSave_Click" HorizontalAlignment="Left" Width="140" Height="49" VerticalAlignment="Top" Background="LightGray" Margin="337,456,0,0" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Content>
+                <Image Source="/Resources/strelochka.png" Width="50" Height="30"/>
+            </Button.Content>
+        </Button>
+    </Grid>
+</Page>

@@ -1,0 +1,67 @@
+﻿<Page x:Class="Testing_Program.PageTests"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Testing_Program"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="920"
+      Title="PageTests" IsVisibleChanged="Page_IsVisibleChanged">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"></RowDefinition>
+            <RowDefinition Height="377*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Name="lblConstruktor" Content="Конструктор тестов" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60" Width="357" FontSize="30" FontWeight="Bold" Margin="63,0,0,0"/>
+        <Button HorizontalAlignment="Left" Name="btnAdd" Width="60" Height="60" VerticalAlignment="Top" Background="LightGray" Click="btnAdd_Click" Margin="692,4,0,0" FontSize="36" FontWeight="Bold">
+            <Button.Content>
+                <Image Source="/Resources/plus3.png" Width="40" Height="40"/>
+            </Button.Content>
+        </Button>
+        <Button HorizontalAlignment="Left" Name="btnDel" Width="60" Height="60" VerticalAlignment="Top" Background="LightGray" Click="btnDel_Click" Margin="757,4,0,0" FontSize="36" FontWeight="Bold">
+            <Button.Content>
+                <Image Source="/Resources/delete1.png" Width="50" Height="50"/>
+            </Button.Content>
+        </Button>
+        <DataGrid Name="dGridTests" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Тест" Binding="{Binding name_Test}" Width="*"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Вопросы" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnQuestions" Width="80" Height="40" Background="LightGray" Click="BtnQuestions_Click">
+                                <Button.Content>
+                                    <Image Source="/Resources/PageForTabl.png" Width="30" Height="30"/>
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnEdit" Width="80" Height="40" Background="LightGray" Click="BtnEdit_Click">
+                                <Button.Content>
+                                    <Image Source="/Resources/redakt.png" Width="30" Height="30"/>
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

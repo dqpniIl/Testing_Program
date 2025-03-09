@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TestingModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="Id_Answer" />
+          </Key>
+          <Property Name="Id_Answer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="answer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="status_answer" Type="nvarchar" MaxLength="20" />
+          <Property Name="id_quest" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id_Question" />
+          </Key>
+          <Property Name="Id_Question" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id_test" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferenceBookEntries">
+          <Key>
+            <PropertyRef Name="Id_Entries" />
+          </Key>
+          <Property Name="Id_Entries" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="topic_Entries" Type="nvarchar" MaxLength="250" />
+          <Property Name="description_Entries" Type="nvarchar(max)" />
+          <Property Name="image_Entries" Type="nvarchar(max)" />
+          <Property Name="link_Entries" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Rezults">
+          <Key>
+            <PropertyRef Name="Id_Rezult" />
+          </Key>
+          <Property Name="Id_Rezult" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="percent" Type="int" Nullable="false" />
+          <Property Name="countRightQuestions" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="grade" Type="int" Nullable="false" />
+          <Property Name="date" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_test" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tests">
+          <Key>
+            <PropertyRef Name="Id_Test" />
+          </Key>
+          <Property Name="Id_Test" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_Test" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="groupe" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Answers__id_ques__14270015">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id_Question" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="id_quest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__id_te__05D8E0BE">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="Id_Test" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezults__id_test__3D2915A8">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Rezults" Type="Self.Rezults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="Id_Test" />
+            </Principal>
+            <Dependent Role="Rezults">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezults__id_user__3C34F16F">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Rezults" Type="Self.Rezults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Rezults">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TestingModelContainer">
+          <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferenceBookEntries" EntityType="Self.ReferenceBookEntries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezults" EntityType="Self.Rezults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tests" EntityType="Self.Tests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Answers__id_ques__14270015" Association="Self.FK__Answers__id_ques__14270015">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__id_te__05D8E0BE" Association="Self.FK__Questions__id_te__05D8E0BE">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezults__id_test__3D2915A8" Association="Self.FK__Rezults__id_test__3D2915A8">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Rezults" EntitySet="Rezults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezults__id_user__3C34F16F" Association="Self.FK__Rezults__id_user__3C34F16F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rezults" EntitySet="Rezults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="Id_Answer" />
+          </Key>
+          <Property Name="Id_Answer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status_answer" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id_quest" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK__Answers__id_ques__14270015" FromRole="Answers" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id_Question" />
+          </Key>
+          <Property Name="Id_Question" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_test" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK__Answers__id_ques__14270015" FromRole="Questions" ToRole="Answers" />
+          <NavigationProperty Name="Tests" Relationship="Self.FK__Questions__id_te__05D8E0BE" FromRole="Questions" ToRole="Tests" />
+        </EntityType>
+        <EntityType Name="ReferenceBookEntries">
+          <Key>
+            <PropertyRef Name="Id_Entries" />
+          </Key>
+          <Property Name="Id_Entries" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="topic_Entries" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="description_Entries" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image_Entries" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="link_Entries" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Rezults">
+          <Key>
+            <PropertyRef Name="Id_Rezult" />
+          </Key>
+          <Property Name="Id_Rezult" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="percent" Type="Int32" Nullable="false" />
+          <Property Name="countRightQuestions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="grade" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_test" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tests" Relationship="Self.FK__Rezults__id_test__3D2915A8" FromRole="Rezults" ToRole="Tests" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Rezults__id_user__3C34F16F" FromRole="Rezults" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Tests">
+          <Key>
+            <PropertyRef Name="Id_Test" />
+          </Key>
+          <Property Name="Id_Test" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_Test" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__id_te__05D8E0BE" FromRole="Tests" ToRole="Questions" />
+          <NavigationProperty Name="Rezults" Relationship="Self.FK__Rezults__id_test__3D2915A8" FromRole="Tests" ToRole="Rezults" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="groupe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rezults" Relationship="Self.FK__Rezults__id_user__3C34F16F" FromRole="Users" ToRole="Rezults" />
+        </EntityType>
+        <Association Name="FK__Answers__id_ques__14270015">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id_Question" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="id_quest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__id_te__05D8E0BE">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="Id_Test" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezults__id_test__3D2915A8">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Rezults" Type="Self.Rezults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="Id_Test" />
+            </Principal>
+            <Dependent Role="Rezults">
+              <PropertyRef Name="id_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rezults__id_user__3C34F16F">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Rezults" Type="Self.Rezults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Rezults">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answers" EntityType="Self.Answers" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" />
+          <EntitySet Name="ReferenceBookEntries" EntityType="Self.ReferenceBookEntries" />
+          <EntitySet Name="Rezults" EntityType="Self.Rezults" />
+          <EntitySet Name="Tests" EntityType="Self.Tests" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Answers__id_ques__14270015" Association="Self.FK__Answers__id_ques__14270015">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__id_te__05D8E0BE" Association="Self.FK__Questions__id_te__05D8E0BE">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezults__id_test__3D2915A8" Association="Self.FK__Rezults__id_test__3D2915A8">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Rezults" EntitySet="Rezults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rezults__id_user__3C34F16F" Association="Self.FK__Rezults__id_user__3C34F16F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rezults" EntitySet="Rezults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TestingModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="TestingModel.Answers">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="Id_Answer" ColumnName="Id_Answer" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="status_answer" ColumnName="status_answer" />
+                <ScalarProperty Name="id_quest" ColumnName="id_quest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="TestingModel.Questions">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="Id_Question" ColumnName="Id_Question" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="id_test" ColumnName="id_test" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenceBookEntries">
+            <EntityTypeMapping TypeName="TestingModel.ReferenceBookEntries">
+              <MappingFragment StoreEntitySet="ReferenceBookEntries">
+                <ScalarProperty Name="Id_Entries" ColumnName="Id_Entries" />
+                <ScalarProperty Name="topic_Entries" ColumnName="topic_Entries" />
+                <ScalarProperty Name="description_Entries" ColumnName="description_Entries" />
+                <ScalarProperty Name="image_Entries" ColumnName="image_Entries" />
+                <ScalarProperty Name="link_Entries" ColumnName="link_Entries" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezults">
+            <EntityTypeMapping TypeName="TestingModel.Rezults">
+              <MappingFragment StoreEntitySet="Rezults">
+                <ScalarProperty Name="Id_Rezult" ColumnName="Id_Rezult" />
+                <ScalarProperty Name="percent" ColumnName="percent" />
+                <ScalarProperty Name="countRightQuestions" ColumnName="countRightQuestions" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_test" ColumnName="id_test" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tests">
+            <EntityTypeMapping TypeName="TestingModel.Tests">
+              <MappingFragment StoreEntitySet="Tests">
+                <ScalarProperty Name="Id_Test" ColumnName="Id_Test" />
+                <ScalarProperty Name="name_Test" ColumnName="name_Test" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TestingModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="groupe" ColumnName="groupe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
